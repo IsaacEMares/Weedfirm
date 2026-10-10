@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#111a17" />
+    <title>Weedfirm — Apartment Days</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Weedfirm home"
+        ><span class="brand-mark">W</span>WEEDFIRM<span class="edition"
+          >APARTMENT DAYS</span
+        ></a
+      >
+      <div class="topbar-right">
+        <span class="save-indicator">LOCAL SAVE</span
+        ><button id="reset" class="secondary">New game →</button>
+      </div>
+    </header>
+    <div class="workspace">
+      <nav class="sidebar" aria-label="Game areas">
+        <a href="#apartment" class="nav-icon active" aria-label="Apartment">⌂</a
+        ><a href="#growing" class="nav-icon" aria-label="Growing corner">♧</a
+        ><a href="#phone" class="nav-icon" aria-label="Phone orders">▤</a>
+        <div class="sidebar-bottom">01</div>
+      </nav>
+      <div class="content">
+        <header class="page-title">
+          <div>
+            <div class="eyebrow">SANDBOX / STAGE 01</div>
+            <h1>Apartment days<span>.</span></h1>
+            <p>Every empire starts somewhere. This one starts at home.</p>
+          </div>
+          <div class="player">
+            <div class="avatar">20</div>
+            <div>
+              <strong>Just getting started</strong
+              ><span>Age 20 · Independent</span>
+            </div>
+          </div>
+        </header>
+        <main>
+          <section class="apartment" id="apartment">
+            <div class="scene">
+              <div class="scene-label">
+                <span class="live-dot"></span> YOUR APARTMENT
+                <span class="scene-time">GOLDEN HOUR</span>
+              </div>
+              <div
+                class="room"
+                aria-label="Illustrated apartment with a couch, window and growing corner"
+              >
+                <div class="wall-lines"></div>
+                <div class="window">
+                  <div class="sky">
+                    <div class="sun"></div>
+                    <div class="skyline"></div>
+                  </div>
+                  <div class="window-frame"></div>
+                </div>
+                <div class="light-beam"></div>
+                <div class="poster">TAKE<br />IT<br /><em>SLOW.</em></div>
+                <div class="shelf">
+                  <div class="books"></div>
+                  <div class="shelf-pot"></div>
+                </div>
+                <div class="floor"></div>
+                <div class="rug"></div>
+                <div class="couch">
+                  <div class="couch-back"></div>
+                  <div class="cushion c1"></div>
+                  <div class="cushion c2"></div>
+                  <div class="arm a1"></div>
+                  <div class="arm a2"></div>
+                  <div class="couch-leg l1"></div>
+                  <div class="couch-leg l2"></div>
+                  <div class="pillow"></div>
+                </div>
+                <div class="table">
+                  <div class="cup"></div>
+                  <div class="magazine"></div>
+                </div>
+                <div class="grow-light"></div>
+                <div class="room-plant">
+                  <div class="stalk">
+                    <i></i><i></i><i></i><i></i><i></i><i></i>
+                  </div>
+                  <div class="pot"></div>
+                </div>
+                <div class="crate"></div>
+                <div class="room-caption">
+                  SMALL SPACE. <span>BIG POSSIBILITIES.</span>
+                </div>
+                <div class="dust d1"></div>
+                <div class="dust d2"></div>
+                <div class="dust d3"></div>
+              </div>
+              <div class="scene-bottom">
+                <span>⌂ &nbsp; Home base</span
+                ><span>1 bedroom · No rent due yet</span>
+              </div>
+            </div>
+            <div class="stats" id="stats"></div>
+            <div class="section-heading">
+              <div>
+                <span class="eyebrow">A LITTLE PATIENCE GOES A LONG WAY</span>
+                <h2 id="growing">Growing corner</h2>
+              </div>
+              <span class="timer-label">◷ 45s / cycle</span>
+            </div>
+            <div id="plants" class="plants"></div>
+            <div class="shop">
+              <div>
+                <h3>Keep things growing</h3>
+                <p>Supplies & apartment upgrades</p>
+              </div>
+              <button data-action="seed" id="seed">Buy seed · $8</button
+              ><button data-action="upgrade" id="upgrade" class="secondary">
+                Second slot · $60
+              </button>
+            </div>
+            <div class="goal" id="goal"></div>
+          </section>
+          <aside class="phone" id="phone">
+            <div class="phone-top">
+              <span>9:41</span>
+              <div class="notch"></div>
+              <span>▥ ▰</span>
+            </div>
+            <div class="section-heading">
+              <div>
+                <span class="eyebrow">STAY CONNECTED</span>
+                <h2>Messages<span class="title-dot">.</span></h2>
+              </div>
+              <span id="unread" class="badge"></span>
+            </div>
+            <p class="phone-note">Your next opportunity is a text away.</p>
+            <div id="orders"></div>
+            <div class="phone-home"></div>
+          </aside>
+        </main>
+        <div id="notice" role="status" aria-live="polite">
+          Welcome home. Plant your first seed to get started.
+        </div>
+        <footer>
+          <span>WEEDFIRM / EARLY SANDBOX</span
+          ><span>Simulated texts · Saved on this device</span>
+        </footer>
+      </div>
+    </div>
+    <script type="module" src="/src/app.ts"></script>
+  </body>
+</html>
