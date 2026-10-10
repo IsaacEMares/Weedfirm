@@ -21,6 +21,11 @@ export interface GameState {
   serial: number;
 }
 export const GROW_TIME = 45000;
+export const SEED_PACKS = [
+  { id: 1, name: "Single seed", quantity: 1, price: 8, label: "Try it out" },
+  { id: 3, name: "Starter pack", quantity: 3, price: 21, label: "Save $3" },
+  { id: 5, name: "Grower pack", quantity: 5, price: 32, label: "Save $8" },
+] as const;
 export function freshGame(now = Date.now()): GameState {
   return {
     version: 1,
@@ -84,10 +89,13 @@ export function act(
     state.slots[id] = null;
     return "Harvested 3 units.";
   }
-  if (action === "seed" && state.cash >= 8) {
-    state.cash -= 8;
-    state.seeds++;
-    return "Bought one seed for $8.";
+  if (action === "seed") {
+    const pack = SEED_PACKS.find((pack) => pack.id === id);
+    if (!pack) return "Choose a seed pack from the supplier.";
+    if (state.cash < pack.price) return "Not enough cash for that seed pack.";
+    state.cash -= pack.price;
+    state.seeds += pack.quantity;
+    return `Bought ${pack.quantity} ${pack.quantity === 1 ? "seed" : "seeds"} from Nora for $${pack.price}. Added to your inventory.`;
   }
   if (action === "upgrade" && state.slots.length === 1 && state.cash >= 60) {
     state.cash -= 60;

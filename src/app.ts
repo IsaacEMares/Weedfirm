@@ -1,4 +1,4 @@
-import { freshGame, tick, act, GROW_TIME } from "./game";
+import { freshGame, tick, act, GROW_TIME, SEED_PACKS } from "./game";
 import type { GameState } from "./game";
 const $ = <T extends HTMLElement = HTMLElement>(selector: string): T =>
   document.querySelector<T>(selector)!;
@@ -72,7 +72,16 @@ function render() {
       })
       .join(""),
   );
-  $<HTMLButtonElement>("#seed").disabled = state.cash < 8;
+  html(
+    "#seed-packs",
+    SEED_PACKS.map(
+      (pack) =>
+        `<article class="seed-pack"><span class="pack-label">${pack.label}</span><div class="seed-art" aria-hidden="true"><i></i><i></i><i></i></div><h3>${pack.name}</h3><p>${pack.quantity} ${pack.quantity === 1 ? "seed" : "seeds"} · Classic variety</p><div class="pack-bottom"><strong>$${pack.price}</strong><button data-action="seed" data-id="${pack.id}" ${state.cash < pack.price ? "disabled" : ""} aria-label="Buy ${pack.name.toLowerCase()} for $${pack.price}">Buy pack <span aria-hidden="true">+</span></button></div>${state.cash < pack.price ? '<span class="shortfall">Need $' + (pack.price - state.cash) + " more</span>" : '<span class="shortfall">Instant inventory delivery</span>'}</article>`,
+    ).join(""),
+  );
+  $("#grow-status").textContent =
+    `${state.slots.filter(Boolean).length} / ${state.slots.length} slots in use`;
+  $("#supplier-balance").textContent = `$${state.cash} available`;
   $<HTMLButtonElement>("#upgrade").disabled =
     state.cash < 60 || state.slots.length > 1;
   $("#upgrade").textContent =
@@ -103,13 +112,20 @@ function render() {
       ?.focus({ preventScroll: true });
 }
 document.addEventListener("click", (event) => {
-  const button = (event.target as HTMLElement).closest("button");
+  const target = event.target as HTMLElement;
+  const link = target.closest<HTMLAnchorElement>(".section-nav a");
+  if (link) {
+    document
+      .querySelectorAll(".section-nav a")
+      .forEach((item) => item.classList.toggle("active", item === link));
+  }
+  const button = target.closest("button");
   if (!button) return;
   if (button.id === "reset") {
     if (!confirm("Start a new game? Your saved progress will be replaced."))
       return;
     state = freshGame();
-    $("#notice").textContent = "Fresh start. Welcome back to the apartment.";
+    $("#notice").textContent = "Fresh start. Your growing operation is ready.";
   } else if (button.dataset.action)
     $("#notice").textContent = act(
       state,

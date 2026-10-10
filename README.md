@@ -2,7 +2,7 @@
 
 A fictional Stage 1 sandbox built with strict TypeScript, Vite, and CSS artwork. Start at age 20 in a small apartment. Plant and water a seed, harvest after 45 seconds, accept simulated customer texts, fulfill orders, and reinvest in a second growing slot. Complete five orders and unlock the slot to reach the first milestone.
 
-The apartment, furniture, window light, and plants are drawn in CSS. Stylesheet animations handle light, dust, plant movement, incoming messages, watering, harvests, and sale feedback. Reduced-motion preferences disable animation. Layouts support desktop and mobile without external fonts or art downloads.
+The interface focuses on growing slots, resources, customer messages, and Nora’s Seed Supply, without a room illustration. Nora sells a single seed for $8, three seeds for $21, or five seeds for $32. Purchases charge cash immediately and add seeds to inventory; unaffordable packs are disabled. Plants and seeds are drawn in CSS. Stylesheet animations handle plant movement, incoming messages, watering, harvests, purchases, and sale feedback. Reduced-motion preferences disable animation. Layouts support desktop and mobile without external fonts or art downloads.
 
 ## Develop
 
@@ -29,6 +29,6 @@ npm run build
 npm run test:browser
 ```
 
-Game tests cover growth, sales, resource restrictions, message limits, and serialized state. Browser tests exercise the full loop, reloading saved progress, and mobile overflow. They use the environment's installed `/usr/bin/chromium`; set `CHROMIUM_PATH` to another installed Chromium executable when needed. No browser download is required in this cloud environment.
+Game tests cover growth, sales, resource restrictions, message limits, serialized state, and seed-pack pricing. Browser tests exercise the full loop, supplier purchases and affordability, reloading saved progress, and mobile overflow. They use the environment's installed `/usr/bin/chromium`; set `CHROMIUM_PATH` to another installed Chromium executable when needed. No browser download is required in this cloud environment.
 
 The production build is generated in `dist/`. Screenshots from browser validation appear under ignored `test-results/`.

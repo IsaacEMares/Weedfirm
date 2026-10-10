@@ -47,3 +47,22 @@ test("save roundtrip preserves growth and limits active messages", () => {
   for (let t = 100000; t < 500000; t += 30000) tick(restored, t);
   assert.equal(restored.orders.length, 3);
 });
+
+test("supplier packs charge their price and reject invalid or unaffordable purchases", () => {
+  const s = freshGame(0);
+  act(s, "seed", 3);
+  assert.equal(s.cash, 19);
+  assert.equal(s.seeds, 5);
+  act(s, "seed", 5);
+  assert.equal(s.cash, 19);
+  assert.equal(s.seeds, 5);
+  act(s, "seed", 999);
+  assert.equal(s.cash, 19);
+  act(s, "seed", 1);
+  assert.equal(s.cash, 11);
+  assert.equal(s.seeds, 6);
+  const rich = freshGame(0);
+  act(rich, "seed", 5);
+  assert.equal(rich.cash, 8);
+  assert.equal(rich.seeds, 7);
+});
